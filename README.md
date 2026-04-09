@@ -1,24 +1,25 @@
 # 🚀 Vibe Coder
 
-**Vibe Coder** is an autonomous AI agent designed to build, fix, and run React applications from simple natural language prompts. It leverages the power of Gemini (via function calling) to act as a pair programmer that doesn't just write code, but also ensures the application actually builds and runs.
+**Vibe Coder** is an autonomous AI agent designed to build, fix, and run applications from simple natural language prompts. It leverages the power of Gemini (via function calling) to act as a pair programmer that doesn't just write code, but also ensures the application actually builds and runs.
 
 ## ✨ Features
 
-- **Autonomous Scaffolding**: Automatically sets up a modern Vite + React + TypeScript base.
+- **Multi-Framework Support**: Automatically scaffolds and builds apps in **React** (via Vite) or **Angular** (via Angular CLI).
+- **Autonomous Scaffolding**: Initializes a production-ready environment in the dynamic `output/` directory.
 - **Agentic Coding**: Uses a tool-calling loop with the **[@google/genai SDK](https://www.npmjs.com/package/@google/genai)** to write components, styles, and logic.
 - **Self-Healing Build System**: If the application fails to build, Vibe Coder captures the compiler errors and asks the AI to fix them—retrying up to 5 times.
-- **Automated Preview**: Once the build is successful, it automatically launches the app in preview mode.
+- **Automated Preview/Serve**: Once the build is successful, it automatically launches the app (`npm run preview` for React, `npm run start` for Angular).
 
 ## 📁 Project Structure
 
 - `src/flows/`: Core logic for different stages of the lifecycle.
-  - `scaffoldApp.ts`: Initializes the output directory.
+  - `scaffoldApp.ts`: Initializes the output directory based on the chosen framework.
   - `createApp.ts`: The main AI agentic loop for writing code.
   - `buildApp.ts`: Handles the build process and automated bug fixing.
-  - `startApp.ts`: Runs the final production-ready preview.
-- `src/prompts/`: Structured templates for system instructions and build-error context.
-- `src/tools/`: The set of tools the AI can use (filesystem operations, etc.).
-- `output/`: The directory where your generated React app lives.
+  - `startApp.ts`: Runs the final production-ready application.
+- `src/prompts/`: Framework-aware templates for system instructions and build-error context.
+- `src/tools/`: The set of tools the AI can use (filesystem operations, listing files, etc.).
+- `output/`: The dynamic directory where your generated app lives (relative to the project root).
 
 ## 🚀 Getting Started
 
@@ -35,18 +36,27 @@ npm install
 ```
 
 ### 3. Usage
-Run the main script with your request:
+Run the main script with your request and framework choice:
+
+**React (Default):**
 ```bash
-npx tsx src/index.ts "build me a beautiful glassmorphic multi-step signup form"
+npm run dev -- --prompt "build me a beautiful glassmorphic multi-step signup form" --framework react
 ```
+
+**Angular:**
+```bash
+npm run dev -- --prompt "build me a simple todo app" --framework angular
+```
+
+*Note: You can also use `npx tsx src/index.ts` directly.*
 
 ## 🛠️ How it Works
 
-1. **Scaffold**: A clean Vite template is copied into the `output/` folder.
-2. **Create**: The AI agent analyzes the prompt and begins calling tools to create files.
+1. **Scaffold**: A framework-specific template (React/Vite or Angular) is initialized in the `output/` folder.
+2. **Create**: The AI agent analyzes the prompt and begins calling tools to create files, with system instructions tailored to the chosen framework.
 3. **Build**: The system runs `npm run build`. 
-4. **Fix**: If the build fails, the agent reads the error logs, looks at the code, and applies fixes.
-5. **Preview**: Once error-free, the app is served via `npm run preview`.
+4. **Fix**: If the build fails, the agent reads the error logs, looks at the code, and applies framework-specific fixes.
+5. **Preview/Serve**: Once error-free, the app is launched using the appropriate command (`npm run preview` or `npm run start`).
 
 ## 📝 License
 MIT

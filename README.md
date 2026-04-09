@@ -1,6 +1,8 @@
 # 🚀 Vibe Coder
 
-**Vibe Coder** is an autonomous AI agent designed to build, fix, and run applications from simple natural language prompts. It leverages the power of Gemini (via function calling) to act as a pair programmer that doesn't just write code, but also ensures the application actually builds and runs.
+**Vibe Coder** is an autonomous AI agent designed to build, fix, and run applications from simple natural language prompts. 
+
+Built from the ground up without relying on high-level agent frameworks (like LangChain or CrewAI), it serves as a lightweight, educational example of how a pure agentic loop—combining tool calling, state management, and self-healing—can be implemented directly using the **[@google/genai SDK](https://www.npmjs.com/package/@google/genai)**.
 
 ## ✨ Features
 
@@ -9,6 +11,12 @@
 - **Agentic Coding**: Uses a tool-calling loop with the **[@google/genai SDK](https://www.npmjs.com/package/@google/genai)** to write components, styles, and logic.
 - **Self-Healing Build System**: If the application fails to build, Vibe Coder captures the compiler errors and asks the AI to fix them—retrying up to 5 times.
 - **Automated Preview/Serve**: Once the build is successful, it automatically launches the app (`npm run preview` for React, `npm run start` for Angular).
+
+## 🎯 Philosophy & Educational Goal
+The primary goal of Vibe Coder is to demystify AI agents. Instead of using high-level abstractions that hide the underlying mechanics, this project implements the "raw" agentic loop:
+- **No Agent Frameworks**: No LangChain, no CrewAI, no AutoGPT. Just direct SDK calls.
+- **Transparency**: Every step—from prompt construction to tool selection and error handling—is visible and manageable in the code.
+- **Pure Tool Calling**: Demonstrates how to use native function calling to interact with the real world (filesystem, terminal).
 
 ## 📁 Project Structure
 

@@ -1,5 +1,9 @@
-export function getBuildFixPrompt(fileTree: string[], buildError: string, userPrompt: string) {
-  return `You are an expert React developer tasked with fixing a build failure.
+import { Framework } from '../types';
+
+export function getBuildFixPrompt(fileTree: string[], buildError: string, userPrompt: string, framework: Framework) {
+  const frameworkName = framework === Framework.REACT ? 'React' : 'Angular';
+
+  return `You are an expert ${frameworkName} developer tasked with fixing a build failure.
 
 The user's original objective was: "${userPrompt}". 
 
@@ -26,3 +30,4 @@ Suggested Workflow:
 Use the provided tools recursively. After you have applied the fixes, provide a brief summary of what was wrong and how you fixed it. 
 Do NOT provide a final summary until you are confident the code is correct.`;
 }
+

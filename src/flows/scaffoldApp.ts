@@ -1,21 +1,35 @@
 import fs from 'fs';
 import { execSync } from 'child_process';
 import { OUTPUT_DIR } from '../config';
+import { Framework } from '../types';
 
-export function scaffoldApp() {
+export function scaffoldApp(framework: Framework) {
   if (fs.existsSync(OUTPUT_DIR)) {
     console.log(`Cleaning up existing directory: ${OUTPUT_DIR}`);
     fs.rmSync(OUTPUT_DIR, { recursive: true, force: true });
   }
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
-  console.log("Scaffolding React app in OUTPUT_DIR...");
-  // Using npx create-vite to generate a React app in the given directory
-  execSync('npm create vite@5.2.0 --yes . -- --template react-ts', {
-    cwd: OUTPUT_DIR,
-    stdio: 'inherit'
-  });
-  console.log("React app scaffolded successfully.");
+  const scaffoldCommands = {
+    [Framework.REACT]: 'npm create vite@5.2.0 --yes . -- --template react-ts',
+    [Framework.ANGULAR]: 'NG_CLI_ANALYTICS=false npx -y @angular/cli@17 new vibe-app --directory . --defaults --skip-git --skip-install'
+  };
+
+  const command = scaffoldCommands[framework];
+  const frameworkLabel = framework === Framework.REACT ? 'React' : 'Angular';
+
+  console.log(`Scaffolding ${frameworkLabel} app in OUTPUT_DIR...`);
+  try {
+    execSync(command, {
+      cwd: OUTPUT_DIR,
+      stdio: 'inherit',
+      input: framework === Framework.ANGULAR ? 'n' : undefined
+    });
+    console.log(`${frameworkLabel} app scaffolded successfully.`);
+  } catch (e) {
+    console.error(`Failed to scaffold ${frameworkLabel} app. Ensure Node.js and npm are installed and you have internet access.`);
+    throw e;
+  }
 
   console.log("Initializing git repository for tracking changes...");
   try {

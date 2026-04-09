@@ -3,8 +3,9 @@ import { OUTPUT_DIR } from '../config';
 import { createApp } from './createApp';
 import { getBuildFixPrompt } from '../prompts/buildApp';
 import { getFileTree } from '../tools';
+import { Framework } from '../types';
 
-export async function buildApp(userPrompt: string, retries = 5): Promise<boolean> {
+export async function buildApp(userPrompt: string, framework: Framework, retries = 5): Promise<boolean> {
   let attempt = 0;
 
   while (attempt < retries) {
@@ -35,8 +36,8 @@ export async function buildApp(userPrompt: string, retries = 5): Promise<boolean
       if (attempt < retries) {
         console.log("🤖 Asking AI to fix the build errors...");
         const fileTree = getFileTree(OUTPUT_DIR);
-        const fixPrompt = getBuildFixPrompt(fileTree, buildError, userPrompt);
-        const fixSuccess = await createApp(userPrompt, fixPrompt);
+        const fixPrompt = getBuildFixPrompt(fileTree, buildError, userPrompt, framework);
+        const fixSuccess = await createApp(userPrompt, framework, fixPrompt);
         if (!fixSuccess) {
           console.error("❌ Agent failed to provide a fix within turn limits.");
         }

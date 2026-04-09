@@ -2,8 +2,9 @@ import { ai } from '../utils';
 import { OUTPUT_DIR } from '../config';
 import { getFileTree, tools, toolHandlers } from '../tools';
 import { getSystemPrompt } from '../prompts/createApp';
+import { Framework } from '../types';
 
-export async function createApp(userPrompt: string, customSystemPrompt?: string): Promise<boolean> {
+export async function createApp(userPrompt: string, framework: Framework, customSystemPrompt?: string): Promise<boolean> {
   const model = "gemini-3-flash-preview"; // More capable model for tool use
   const fileTree = getFileTree(OUTPUT_DIR);
 
@@ -11,7 +12,7 @@ export async function createApp(userPrompt: string, customSystemPrompt?: string)
     {
       role: 'user',
       parts: [{
-        text: customSystemPrompt || getSystemPrompt(fileTree, userPrompt)
+        text: customSystemPrompt || getSystemPrompt(fileTree, userPrompt, framework)
       }]
     }
   ];

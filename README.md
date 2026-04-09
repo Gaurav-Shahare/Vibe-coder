@@ -60,7 +60,6 @@ npm run dev -- --prompt "build me a simple todo app" --framework angular
 
 ## 🗺️ Roadmap (To-Do)
 
-- [ ] **Decouple harness from the Create App flow**: Modularize the core agentic loop for better reusability.
 - [ ] **Expanded Toolset**: Add more advanced tools like `grep`, `edit_file` (for targeted edits), and `git` integration.
 - [ ] **Spec-Driven Development**: Implement a flow where the agent writes an implementation plan and creates tasks, marking them as completed during execution.
 - [ ] **Detailed Worklog**: Log exactly what the agent did in each turn for better transparency.
@@ -68,6 +67,11 @@ npm run dev -- --prompt "build me a simple todo app" --framework angular
 - [ ] **Enhanced CLI UI**: Improve the terminal interface with better formatting, progress bars, and status updates.
 - [ ] **Multi-provider SDK Support**: Support OpenAI and Anthropic SDKs alongside Gemini.
 
+## ✅ Done
+
+- [x] **Decouple harness from the Create App flow**: Modularize the core agentic loop for better reusability.
+
 ## 📝 License
 MIT
+
 

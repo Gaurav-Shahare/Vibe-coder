@@ -1,9 +1,9 @@
 import { execSync } from 'child_process';
 import { OUTPUT_DIR } from '../config';
-import { createApp } from './createApp';
 import { getBuildFixPrompt } from '../prompts/buildApp';
-import { getFileTree } from '../tools';
+import { getFileTree, tools, toolHandlers } from '../tools';
 import { Framework } from '../types';
+import { runAgent } from '../agent/harness';
 
 export async function buildApp(userPrompt: string, framework: Framework, retries = 5): Promise<boolean> {
   let attempt = 0;
@@ -37,7 +37,11 @@ export async function buildApp(userPrompt: string, framework: Framework, retries
         console.log("🤖 Asking AI to fix the build errors...");
         const fileTree = getFileTree(OUTPUT_DIR);
         const fixPrompt = getBuildFixPrompt(fileTree, buildError, userPrompt, framework);
-        const fixSuccess = await createApp(userPrompt, framework, fixPrompt);
+        const fixSuccess = await runAgent({
+          systemPrompt: fixPrompt,
+          tools,
+          toolHandlers
+        });
         if (!fixSuccess) {
           console.error("❌ Agent failed to provide a fix within turn limits.");
         }

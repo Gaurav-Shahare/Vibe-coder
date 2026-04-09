@@ -66,6 +66,9 @@ npm run dev -- --prompt "build me a simple todo app" --framework angular
 - [ ] **MCP & Skills Support**: Integrate with Model Context Protocol and external skills.
 - [ ] **Enhanced CLI UI**: Improve the terminal interface with better formatting, progress bars, and status updates.
 - [ ] **Multi-provider SDK Support**: Support OpenAI and Anthropic SDKs alongside Gemini.
+- [ ] **State Persistence**: Integrate SQLite to persist the snapshot so that you can pick up from where you left off.
+- [ ] **Automated Evals**: Implement a framework to evaluate the agent's performance and accuracy across various prompts.
+- [ ] **YAML Prompt Templates**: Move hardcoded prompts into external YAML files for better maintainability and customization.
 
 ## ✅ Done
 

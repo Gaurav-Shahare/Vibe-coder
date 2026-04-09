@@ -58,5 +58,16 @@ npm run dev -- --prompt "build me a simple todo app" --framework angular
 4. **Fix**: If the build fails, the agent reads the error logs, looks at the code, and applies framework-specific fixes.
 5. **Preview/Serve**: Once error-free, the app is launched using the appropriate command (`npm run preview` or `npm run start`).
 
+## 🗺️ Roadmap (To-Do)
+
+- [ ] **Decouple harness from the Create App flow**: Modularize the core agentic loop for better reusability.
+- [ ] **Expanded Toolset**: Add more advanced tools like `grep`, `edit_file` (for targeted edits), and `git` integration.
+- [ ] **Spec-Driven Development**: Implement a flow where the agent writes an implementation plan and creates tasks, marking them as completed during execution.
+- [ ] **Detailed Worklog**: Log exactly what the agent did in each turn for better transparency.
+- [ ] **MCP & Skills Support**: Integrate with Model Context Protocol and external skills.
+- [ ] **Enhanced CLI UI**: Improve the terminal interface with better formatting, progress bars, and status updates.
+- [ ] **Multi-provider SDK Support**: Support OpenAI and Anthropic SDKs alongside Gemini.
+
 ## 📝 License
 MIT
+

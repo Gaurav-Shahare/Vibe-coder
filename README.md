@@ -68,7 +68,7 @@ npm run dev -- --prompt "build me a simple todo app" --framework angular
 
 ## 🗺️ Roadmap (To-Do)
 
-- [ ] **Expanded Toolset**: Add more advanced tools like `grep`, `edit_file` (for targeted edits), and `git` integration.
+- [ ] **Advanced Toolset**: Add `edit_file` (for targeted edits) and `git` integration.
 - [ ] **Spec-Driven Development**: Implement a flow where the agent writes an implementation plan and creates tasks, marking them as completed during execution.
 - [ ] **Detailed Worklog**: Log exactly what the agent did in each turn for better transparency.
 - [ ] **MCP & Skills Support**: Integrate with Model Context Protocol and external skills.
@@ -81,6 +81,7 @@ npm run dev -- --prompt "build me a simple todo app" --framework angular
 ## ✅ Done
 
 - [x] **Decouple harness from the Create App flow**: Modularize the core agentic loop for better reusability.
+- [x] **Recursive Grep Tool**: Integrated a high-performance search tool with automatic `node_modules` and hidden folder exclusion.
 
 ## 📝 License
 MIT

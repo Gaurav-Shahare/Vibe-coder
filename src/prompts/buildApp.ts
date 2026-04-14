@@ -23,11 +23,10 @@ Based on the build error above, you should:
 5. Make sure the results still align with the user's original objective: "${userPrompt}".
 
 Suggested Workflow:
-1. Discovery: Use 'list_files' and 'read_file' to examine the files mentioned in the build error.
+1. Discovery: Use 'list_files', 'grep', and 'read_file' to examine the files mentioned in the build error or search for usage patterns.
 2. Implementation: Fix the code issues including syntax errors, missing imports, or logic flaws.
 3. Verification: Briefly check if any other files need updates to support your fixes.
 
 Use the provided tools recursively. After you have applied the fixes, provide a brief summary of what was wrong and how you fixed it. 
 Do NOT provide a final summary until you are confident the code is correct.`;
 }
-

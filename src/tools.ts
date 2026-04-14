@@ -41,6 +41,17 @@ export const tools: any = {
         },
         required: ['path', 'content']
       }
+    },
+    {
+      name: 'grep',
+      description: 'Searches for a pattern in all files within the project directory.',
+      parameters: {
+        type: 'object',
+        properties: {
+          pattern: { type: 'string', description: 'The regex pattern to search for.' }
+        },
+        required: ['pattern']
+      }
     }
   ]
 };
@@ -59,5 +70,13 @@ export const toolHandlers: Record<string, (args: any) => any> = {
     fs.mkdirSync(path.dirname(fullPath), { recursive: true });
     fs.writeFileSync(fullPath, content);
     return { success: true };
+  },
+  grep: ({ pattern }: { pattern: string }) => {
+    try {
+      const output = execSync(`grep -rInE "${pattern.replace(/"/g, '\\"')}" . --exclude-dir=node_modules --exclude-dir=".*"`, { cwd: OUTPUT_DIR }).toString();
+      return { results: output.split('\n').filter(line => line) };
+    } catch (e) {
+      return { results: [] };
+    }
   }
 };
